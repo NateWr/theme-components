@@ -186,15 +186,6 @@ h1 {
 }
 
 @media (min-width: 767px) {
-	.issue-archives__tabs,
-	.issue-archives__tab-panels {
-		padding: 1rem;
-	}
-
-	.issue-archives__tab-panels {
-		padding: 1rem 0 1rem 2rem;
-	}
-
 	.issue-archives__header {
 		display: flex;
 		align-items: center;
@@ -217,7 +208,8 @@ h1 {
 	.issue-archives__tabs-list {
 		display: block;
 		min-width: 12rem;
-		margin-right: 0.5rem;
+		margin-top: 1rem;
+		margin-right: 1rem;
 	}
 
 	.issue-archives__button {
@@ -264,6 +256,12 @@ h1 {
 		padding-left: 0.5em;
 		background: var(--background-color);
 		font-weight: normal;
+	}
+
+	.issue-archives__tab-panels {
+		padding-top: 1rem;
+		padding-left: 2rem;
+		flex: 1;
 	}
 }
 </style>

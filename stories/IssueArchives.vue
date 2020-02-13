@@ -20,56 +20,74 @@
 				</form>
 			</div>
 		</div>
-		<div class="issue-archives__tab-wrapper">
-			<div class="issue-archives__tabs">
-				<ul class="issue-archives__tabs-list" role="tablist">
-					<li
+		<template v-if="view === 'issues'">
+			<div class="issue-archives__tab-wrapper">
+				<div class="issue-archives__tabs">
+					<ul class="issue-archives__tabs-list" role="tablist">
+						<li
+							v-for="tab in archives"
+							:key="tab.year + tab.volume"
+							class="issue-archives__tabs-list-item"
+							role="presentation"
+						>
+							<button
+								:id="'issue-archive__button-' + tab.year"
+								:ref="'button' + tab.year"
+								class="issue-archives__button"
+								:aria-selected="activeTab.year === tab.year"
+								:tabindex="activeTab.year !== tab.year ? '-1' : '0'"
+								role="tab"
+								type="button"
+								@click="activeTab = tab"
+								@keyup.right="right()"
+								@keyup.left="left()"
+							>
+								<span class="issue-archives__button-text--year">
+									{{ tab.year }}
+								</span>
+								<span class="issue-archives__button-text--separator">—</span>
+								<span class="issue-archives__button-text--volume">
+									Volume {{ tab.volume }}
+								</span>
+							</button>
+						</li>
+					</ul>
+				</div>
+				<div class="issue-archives__tab-panels">
+					<section
 						v-for="tab in archives"
 						:key="tab.year + tab.volume"
-						class="issue-archives__tabs-list-item"
-						role="presentation"
+						:aria-labelledby="'issue-archives__button' + tab.year"
+						:hidden="activeTab.year !== tab.year"
+						tabindex="-1"
+						role="tabpanel"
 					>
-						<button
-							:id="'issue-archive__button-' + tab.year"
-							:ref="'button' + tab.year"
-							class="issue-archives__button"
-							:aria-selected="activeTab.year === tab.year"
-							:tabindex="activeTab.year !== tab.year ? '-1' : '0'"
-							role="tab"
-							type="button"
-							@click="activeTab = tab"
-							@keyup.right="right()"
-							@keyup.left="left()"
-						>
-							<span class="issue-archives__button-text--year">
-								{{ tab.year }}
-							</span>
-							<span class="issue-archives__button-text--separator">—</span>
-							<span class="issue-archives__button-text--volume">
-								Volume {{ tab.volume }}
-							</span>
-						</button>
-					</li>
-				</ul>
+						<h2 class="-screen-reader">{{ year }}</h2>
+						<IssueSummary
+							v-for="issueSummary in tab.issues"
+							:key="issueSummary.volume + issueSummary.year"
+							v-bind="issueSummary"
+						/>
+					</section>
+				</div>
 			</div>
-			<div class="issue-archives__tab-panels">
+		</template>
+		<template v-else-if="view === 'covers'">
+			<div>
 				<section
 					v-for="tab in archives"
-					:key="tab.year + tab.volume"
-					:aria-labelledby="'issue-archives__button' + tab.year"
-					:hidden="activeTab.year !== tab.year"
-					tabindex="-1"
-					role="tabpanel"
+					:key="tab.volume + tab.year"
+					class="issue-archives__covers-volumes"
 				>
-					<h2 class="-screen-reader">{{ year }}</h2>
 					<IssueSummary
 						v-for="issueSummary in tab.issues"
 						:key="issueSummary.volume + issueSummary.year"
-						v-bind="issueSummary"
+						v-bind="issueSummary.year"
+						:image="issueSummary.image"
 					/>
 				</section>
 			</div>
-		</div>
+		</template>
 	</div>
 </template>
 
@@ -79,38 +97,48 @@ import IssueSummary from './IssueSummary.vue';
 export default {
 	components: {IssueSummary},
 	props: {
-		archives: Object
+		archives: Object,
+		view: {
+			type: String,
+			default() {
+				return 'covers';
+			}
+		}
 	},
 	data() {
 		return {
 			activeTab: 0
 		};
 	},
+	watch: {
+		activeTab(newVal) {
+			if (this.$refs['button' + newVal.year]) {
+				this.$refs['button' + newVal.year][0].focus();
+			}
+		}
+	},
+	mounted() {
+		this.activeTab = this.archives[0];
+	},
 	methods: {
 		right() {
-			const i = this.archives.findIndex(tab => this.activeTab.year === tab.year) + 1;
-			if (i > (this.archives.length - 1)) {
+			const i =
+				this.archives.findIndex(tab => this.activeTab.year === tab.year) + 1;
+			if (i > this.archives.length - 1) {
 				this.activeTab = this.archives[0];
 			} else {
 				this.activeTab = this.archives[i];
 			}
 		},
 		left() {
-			const i = this.archives.findIndex(tab => this.activeTab.year === tab.year) - 1;
+			const i =
+				this.archives.findIndex(tab => this.activeTab.year === tab.year) - 1;
 			if (i < 0) {
 				this.activeTab = this.archives[this.archives.length - 1];
 			} else {
 				this.activeTab = this.archives[i];
 			}
 		}
-	},
-	watch: {
-		activeTab(newVal) {
-			this.$refs['button' + newVal.year][0].focus();
-		}
-	},
-	mounted() {
-		this.activeTab = this.archives[0];
 	}
 };
 </script>
@@ -146,6 +174,11 @@ h1 {
 	padding: 0.2rem;
 	left: -0.2rem;
 	border: 2px solid;
+}
+
+.issue-archives__covers-volumes {
+	display: flex;
+	flex-direction: row;
 }
 
 .issue-archives__tabs {

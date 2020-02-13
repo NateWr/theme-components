@@ -1,7 +1,7 @@
 <template>
 	<div class="issue-summary">
 		<div class="issue-summary__wrapper">
-			<h3 class="issue-summary__volume">Vol {{ volume }}, No {{ number }}</h3>
+			<h3 v-if="volume" class="issue-summary__volume">Vol {{ volume }}, No {{ number }}</h3>
 			<div v-if="title" class="issue-summary__title">
 				{{ title }}
 			</div>

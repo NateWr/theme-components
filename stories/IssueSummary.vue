@@ -1,5 +1,5 @@
 <template>
-	<div class="issue-summary">
+	<a :href="url" class="issue-summary" :class="image ? 'issue-summary--has-cover' : ''">
 		<div class="issue-summary__wrapper">
 			<h3 v-if="volume" class="issue-summary__volume">Vol {{ volume }}, No {{ number }}</h3>
 			<div v-if="title" class="issue-summary__title">
@@ -9,20 +9,19 @@
 				{{ date }}
 			</div>
 		</div>
-		<div class="issue-summary__cover-image-wrapper">
-			<img
-				v-if="image"
-				:src="image"
-				class="issue-summary__cover-image"
-				alt="The alt text entered by the user."
-			/>
-		</div>
-	</div>
+		<img
+			v-if="image"
+			:src="image"
+			class="issue-summary__cover-image"
+			alt="The alt text entered by the user."
+		/>
+	</a>
 </template>
 
 <script>
 export default {
 	props: {
+		url: String,
 		volume: Number,
 		number: Number,
 		title: String,
@@ -35,14 +34,15 @@ export default {
 
 <style lang="css">
 .issue-summary {
-	margin: 0;
-	padding-bottom: 1rem;
 	display: flex;
+	margin: 0 0 1rem;
 	justify-content: space-between;
+	text-decoration: none;
+	color: var(--text-color);
 }
 
-.issue-summary__cover-image-wrapper {
-	padding: 0.5rem 1rem;
+.issue-summary__wrapper {
+	padding-right: 1rem;
 }
 
 .issue-summary__title {
@@ -61,7 +61,15 @@ h3 {
 }
 
 .issue-summary__cover-image {
+	display: block;
 	max-width: 6rem;
 	height: auto;
+}
+
+@media (min-width: 500px) {
+
+	.issue-summary__cover-image {
+		max-width: 8rem;
+	}
 }
 </style>

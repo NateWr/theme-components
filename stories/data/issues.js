@@ -1,5 +1,6 @@
 export default [
 	{
+		url: 'http://google.com',
 		volume: 30,
 		number: 4,
 		year: 2019,
@@ -8,6 +9,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 30,
 		number: 3,
 		year: 2019,
@@ -16,6 +18,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 30,
 		number: 2,
 		year: 2019,
@@ -24,6 +27,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 30,
 		number: 1,
 		year: 2019,
@@ -32,6 +36,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 9,
 		number: 4,
 		year: 2018,
@@ -40,6 +45,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 9,
 		number: 3,
 		year: 2018,
@@ -49,6 +55,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 9,
 		number: 2,
 		year: 2018,
@@ -58,6 +65,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 9,
 		number: 1,
 		year: 2018,
@@ -66,6 +74,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 8,
 		number: 1,
 		year: 2017,
@@ -75,6 +84,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 7,
 		number: 8,
 		year: 2016,
@@ -83,6 +93,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 7,
 		number: 7,
 		year: 2016,
@@ -91,6 +102,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 7,
 		number: 6,
 		year: 2016,
@@ -100,6 +112,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 7,
 		number: 5,
 		year: 2016,
@@ -109,6 +122,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 7,
 		number: 4,
 		year: 2016,
@@ -117,6 +131,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 7,
 		number: 3,
 		year: 2016,
@@ -126,6 +141,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 7,
 		number: 2,
 		year: 2016,
@@ -134,6 +150,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 7,
 		number: 1,
 		year: 2016,
@@ -142,6 +159,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 6,
 		number: 3,
 		year: 2015,
@@ -150,6 +168,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 6,
 		number: 2,
 		year: 2015,
@@ -158,6 +177,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 6,
 		number: 1,
 		year: 2015,
@@ -166,6 +186,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 5,
 		number: 4,
 		year: 2014,
@@ -174,6 +195,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 5,
 		number: 3,
 		year: 2014,
@@ -182,6 +204,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 5,
 		number: 2,
 		year: 2014,
@@ -190,6 +213,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 5,
 		number: 1,
 		year: 2014,
@@ -198,6 +222,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 4,
 		number: 3,
 		year: 2013,
@@ -206,6 +231,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 4,
 		number: 2,
 		year: 2013,
@@ -214,6 +240,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 4,
 		number: 1,
 		year: 2013,
@@ -222,6 +249,7 @@ export default [
 		image: '/issue-cover.jpg'
 	},
 	{
+		url: 'http://google.com',
 		volume: 4,
 		number: 3,
 		year: 2013,
@@ -230,6 +258,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 3,
 		number: 4,
 		year: 2012,
@@ -238,6 +267,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 3,
 		number: 3,
 		year: 2012,
@@ -246,6 +276,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 3,
 		number: 2,
 		year: 2012,
@@ -254,6 +285,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 3,
 		number: 1,
 		year: 2012,
@@ -262,6 +294,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 2,
 		number: 2,
 		year: 2011,
@@ -270,6 +303,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 2,
 		number: 1,
 		year: 2011,
@@ -278,6 +312,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 1,
 		number: 2,
 		year: 2010,
@@ -286,6 +321,7 @@ export default [
 		image: ''
 	},
 	{
+		url: 'http://google.com',
 		volume: 1,
 		number: 1,
 		year: 2010,

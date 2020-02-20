@@ -1,3 +1,4 @@
+import {withKnobs, radios} from '@storybook/addon-knobs';
 import IssueArchives from './IssueArchives.vue';
 import notes from './IssueArchives.md';
 import issues from './data/issues.js';
@@ -57,6 +58,7 @@ const archives = [
 
 export default {
 	title: 'IssueArchives',
+	decorators: [withKnobs],
 	parameters: {
 		notes: notes
 	}
@@ -67,9 +69,20 @@ export const base = () => ({
 	props: {
 		archives: {
 			default: archives
+		},
+		view: {
+			default: radios(
+				'Layout',
+				{
+					Issues: 'issues',
+					Covers: 'covers'
+				},
+				'issues'
+			)
 		}
 	},
 	template: `<issue-archives
-            :archives="archives"
+						:archives="archives"
+						:view="view"
     />`
 });

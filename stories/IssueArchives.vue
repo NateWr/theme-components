@@ -1,5 +1,5 @@
 <template>
-	<div class="issue-archives">
+	<div class="issue-archives" :class="'issue-archives--' + view">
 		<div class="issue-archives__header">
 			<div class="issue-archives__header-title">
 				<h1>All Issues</h1>
@@ -33,7 +33,7 @@
 							<button
 								:id="'issue-archive__button-' + tab.year"
 								:ref="'button' + tab.year"
-								class="issue-archives__button"
+								class="issue-archives__button issue-archives__group-name"
 								:aria-selected="activeTab.year === tab.year"
 								:tabindex="activeTab.year !== tab.year ? '-1' : '0'"
 								role="tab"
@@ -42,11 +42,11 @@
 								@keyup.right="right()"
 								@keyup.left="left()"
 							>
-								<span class="issue-archives__button-text--year">
+								<span class="issue-archives__group-title">
 									{{ tab.year }}
 								</span>
-								<span class="issue-archives__button-text--separator">—</span>
-								<span class="issue-archives__button-text--volume">
+								<span class="issue-archives__group-separator">—</span>
+								<span class="issue-archives__group-subtitle">
 									Volume {{ tab.volume }}
 								</span>
 							</button>
@@ -73,18 +73,30 @@
 			</div>
 		</template>
 		<template v-else-if="view === 'covers'">
-			<div>
+			<div class="issue-archives--covers__volumes">
 				<section
 					v-for="tab in archives"
 					:key="tab.volume + tab.year"
-					class="issue-archives__covers-volumes"
+					class="issue-archives--covers__volume"
 				>
-					<IssueSummary
-						v-for="issueSummary in tab.issues"
-						:key="issueSummary.volume + issueSummary.year"
-						v-bind="issueSummary.year"
-						:image="issueSummary.image"
-					/>
+					<div class="issue-archives__covers-group">
+						<h2 class="issue-archives__group-name">
+							<span class="issue-archives__group-title">
+								{{ tab.year }}
+							</span>
+							<span class="issue-archives__group-separator">—</span>
+							<span class="issue-archives__group-subtitle">
+								Volume {{ tab.volume }}
+							</span>
+						</h2>
+					</div>
+					<div class="issue-archives--covers__issues">
+						<IssueSummary
+							v-for="issueSummary in tab.issues"
+							:key="issueSummary.volume + issueSummary.year"
+							v-bind="issueSummary"
+						/>
+					</div>
 				</section>
 			</div>
 		</template>
@@ -98,12 +110,7 @@ export default {
 	components: {IssueSummary},
 	props: {
 		archives: Object,
-		view: {
-			type: String,
-			default() {
-				return 'covers';
-			}
-		}
+		view: String
 	},
 	data() {
 		return {
@@ -176,11 +183,7 @@ h1 {
 	border: 2px solid;
 }
 
-.issue-archives__covers-volumes {
-	display: flex;
-	flex-direction: row;
-}
-
+/* Tabs */
 .issue-archives__tabs {
 	border-bottom: 1px solid;
 }
@@ -213,9 +216,75 @@ h1 {
 	outline: none;
 }
 
-.issue-archives__button-text--separator,
-.issue-archives__button-text--volume {
+.issue-archives--issues .issue-archives__group-separator,
+.issue-archives--issues .issue-archives__group-subtitle {
 	display: none;
+}
+
+.issue-archives__tab-panels {
+	padding-top: 1rem;
+}
+
+/* Covers */
+.issue-archives--covers__volumes {
+	margin-top: 1rem;
+}
+
+.issue-archives--covers .issue-archives__group-name {
+	font-size: 1rem;
+	margin: 0 0 0.25rem;
+}
+
+.issue-archives--covers .issue-summary {
+	display: inline-block;
+	width: 23%;
+	vertical-align: top;
+}
+
+.issue-archives--covers .issue-summary {
+	margin-right: 2%;
+}
+
+.issue-archives--covers .issue-summary--has-cover .issue-summary__wrapper,
+.issue-archives--covers .issue-summary:not(.issue-summary--has-cover) .issue-summary__title,
+.issue-archives--covers .issue-summary:not(.issue-summary--has-cover) .issue-summary__date {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	left: -2000px;
+}
+
+.issue-archives--covers .issue-summary--has-cover .issue-summary__wrapper:focus,
+.issue-archives--covers .issue-summary:not(.issue-summary--has-cover) .issue-summary__title:focus,
+.issue-archives--covers .issue-summary:not(.issue-summary--has-cover) .issue-summary__date:focus {
+	background-color: #fff;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	-webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #000;
+	display: block;
+	font-size: 1rem;
+	height: auto;
+	line-height: normal;
+	padding: 1rem;
+	position: absolute;
+	left: 1rem;
+	top: 1rem;
+	text-decoration: none;
+	width: auto;
+	z-index: 100000;
+}
+
+.issue-archives--covers .issue-summary--has-cover .issue-summary__cover-image {
+	max-width: 100%;
+}
+
+.issue-archives--covers .issue-summary:not(.issue-summary--has-cover) {
+	background: #ddd;
+}
+
+.issue-archives--covers .issue-summary:not(.issue-summary--has-cover) .issue-summary__wrapper {
+	padding: 0.75rem;
 }
 
 @media (min-width: 767px) {
@@ -229,6 +298,47 @@ h1 {
 		margin-left: auto;
 	}
 
+	.issue-archives--issues .issue-archives__group-separator,
+	.issue-archives--issues .issue-archives__group-subtitle {
+		display: block;
+	}
+
+	.issue-archives__group-name {
+		position: relative;
+		width: 100%;
+		text-align: left;
+	}
+
+	.issue-archives__group-title {
+		position: relative;
+		padding-right: 0.5em;
+		background: var(--background-color);
+		z-index: 2;
+	}
+
+	.issue-archives__group-separator {
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 1rem;
+		right: 1rem;
+		height: 1px;
+		overflow: hidden;
+		border-top: 1px solid;
+		z-index: -1;
+		opacity: 0.3;
+	}
+
+	.issue-archives__group-subtitle {
+		display: block;
+		position: relative;
+		float: right;
+		padding-left: 0.5em;
+		background: var(--background-color);
+		font-weight: normal;
+	}
+
+	/* Tabs */
 	.issue-archives__tab-wrapper {
 		display: flex;
 	}
@@ -246,13 +356,10 @@ h1 {
 	}
 
 	.issue-archives__button {
-		position: relative;
-		width: 100%;
 		border-bottom: none;
 		border-left: 2px solid transparent;
 		padding-left: 1rem;
 		padding-right: 1rem;
-		text-align: left;
 	}
 
 	.issue-archives__button[aria-selected],
@@ -262,39 +369,34 @@ h1 {
 		border-left: 2px solid;
 	}
 
-	.issue-archives__button-text--year {
-		position: relative;
-		padding-right: 0.5em;
-		background: var(--background-color);
-		z-index: 2;
-	}
-
-	.issue-archives__button-text--separator {
-		display: block;
-		position: absolute;
-		top: 50%;
-		left: 1rem;
-		right: 1rem;
-		height: 1px;
-		overflow: hidden;
-		border-top: 1px solid;
-		z-index: -1;
-		opacity: 0.3;
-	}
-
-	.issue-archives__button-text--volume {
-		display: block;
-		position: relative;
-		float: right;
-		padding-left: 0.5em;
-		background: var(--background-color);
-		font-weight: normal;
-	}
-
 	.issue-archives__tab-panels {
-		padding-top: 1rem;
 		padding-left: 2rem;
 		flex: 1;
+	}
+
+	/* Covers */
+	.issue-archives--covers__volume {
+		display: flex;
+		margin-top: 1rem;
+	}
+
+	.issue-archives__covers-group {
+		margin: 0 1rem 0 0;
+		width: 25%;
+		font-size: 1rem;
+		font-weight: bold;
+	}
+
+	.issue-archives--covers__issues {
+		width: 100%;
+	}
+
+	.issue-archives--covers .issue-summary {
+		background: #ddd;
+	}
+
+	.issue-archives--covers .issue-summary__wrapper {
+		padding: 0.75rem;
 	}
 }
 </style>
